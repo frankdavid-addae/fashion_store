@@ -114,10 +114,10 @@
 					
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<div class="options text-center text-md-right mt-1">
+						<!-- <div class="options text-center text-md-right mt-1">
 							<p><b>Subtotal: </b></p>
-						  </div>
-						  <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-target="#">Check Out</button>
+						  </div> -->
+						  <a href="checkout.html"><button type="button" class="btn btn-outline-info waves-effect ml-auto checkout" data-target="checkout.html">Check Out</button></a>
 					</div>
 				</div>
 				</div>
@@ -197,7 +197,7 @@
 				  <div class="desc1">
 					<h3 class="item_name">Lorem Ipsum is simply dummy text </h3>
 					<p class="item_desc">Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
-					<h5 class="item_price">GH&cent; 45 </h5>
+					<h5 class="item_price">GH&cent; 45</h5>
 					<div class="available">
 						<h4>Available Options :</h4>
 						<ul>
@@ -211,7 +211,7 @@
 								</select>
 							</li>
 							<li>Qty:
-								<input type="number" class="item_qty" value="1" min="1" max="50">
+								<input type="number" id="item_qty" class="item_qty" value="1" min="1" max="50">
 							</li>
 							<li>Color:
 							<button class="color_btn color_green"></button>

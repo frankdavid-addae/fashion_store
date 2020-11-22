@@ -1166,7 +1166,7 @@ ul.grid_1 li.grid_1-desc p{
 	margin: 0 ;
 	text-align: center;
 	list-style: none;
-	float: left;
+	/* float: left; */
 	outline: none;
 	-webkit-transition: all 0.3s ease-out;
 	-moz-transition: all 0.3s ease-out;
@@ -2773,8 +2773,4 @@ a.to-cart img {
   .cart_delete a:hover {
 	background:#FE980F
   }
-  
-
-
 }
-

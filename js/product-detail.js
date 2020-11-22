@@ -1,5 +1,3 @@
-'use strict';
-
 // localStorage.setItem()
 
 // ITEM CONTROLLER
@@ -24,6 +22,16 @@ var itemController = (() => {
     this.quantity = quantity;
   };
 
+//   var calculateTotal = (price, qty) => {
+//     var sum = 0;
+//     if (qty > 0) {
+//         sum = price * qty;
+//     }
+//     item.allItems.forEach((cur) => sum += cur.value);
+//     item.subTotal = sum;
+
+//   };
+
   var item = {
     allItems: [],
     subTotal: 0,
@@ -31,7 +39,7 @@ var itemController = (() => {
   };
 
   return {
-    addItem: (img, nm, prc, qty) => {
+    addItem: (ID, img, nm, prc, qty) => {
       var newItem, ID;
 
       // [1,2,3,4,5,6], next ID = 7;
@@ -55,6 +63,26 @@ var itemController = (() => {
       return newItem;
     },
 
+    
+    deleteItem: (id) => {
+        var ids, index;
+        
+        // id = 6
+        //item.allItems[id];
+        // ids = [1 2 4  8]
+        //index = 3
+        
+        ids = item.allItems.map((current) => current.id);
+
+        index = ids.indexOf(id);
+
+        if (index !== -1) {
+            item.allItems.splice(index, 1);
+        }
+        
+    },
+    
+    
     // testing: () => {
     //   console.log(item);
     // //   console.log((item.allItems.length - 1).id);
@@ -64,20 +92,6 @@ var itemController = (() => {
   
 })();
 
-// CART CONTROLLER
-// var cartController = (() => {
-
-//   var CartItem = function(id, image, name, price, qty) {
-//     this.id = id;
-//     this.image = image;
-//     this.name = name;
-//     this.price = price;
-//     this.qty = qty;
-//   };
-
-// })();
-
-
 // UI CONTROLLER
 var UIController = (() => {
 
@@ -86,9 +100,10 @@ var UIController = (() => {
     itemName: '.item_name',
     itemPrice: '.item_price',
     itemSize: '.item_size',
-    itemQty: '.item_qty',
+    itemQty: 'item_qty',
     addBtn: '.add_btn',
-    cartItemList: '.cart_item'
+    cartItemList: '.cart_item',
+    checkoutBtn: '.checkout'
   };
 
   return {
@@ -98,7 +113,7 @@ var UIController = (() => {
         name: document.querySelector(DOMStrings.itemName).textContent,
         price: document.querySelector(DOMStrings.itemPrice).textContent,
         size: document.querySelector(DOMStrings.itemSize).value,
-        qty: document.querySelector(DOMStrings.itemQty).value
+        qty: document.getElementById(DOMStrings.itemQty).value
       };
     },
 
@@ -109,14 +124,14 @@ var UIController = (() => {
 
       html = '<tr>' + 
         '<td class="item_name">' +
-          '<h4><a href="">%item_name%</a></h4>' +
+          '<p>%item_name%</p>' +
         '</td>' +
         '<td class="item_price">' +
           '<p>%price%</p>'+
         '</td>'+
         '<td class="item_qty">'+
           '<div class="item_quantity_button">' +
-            '<input class="item_quantity_input" type="text" name="quantity" value="%qty%" autocomplete="off" size="2">' +
+            '<input class="item_quantity_input" type="text" name="quantity" value="%qty%" size="2">' +
             '</div>' +
         '</td>' +
         '<td class="item_total">' +
@@ -130,9 +145,8 @@ var UIController = (() => {
       // Replace the placeholder text with actual data
       newHtml = html.replace('%item_name%', itemObj.name);
       newHtml = newHtml.replace('%price%', itemObj.price);
-      newHtml = newHtml.replace('%qty%', itemObj.qty);
-      newHtml = newHtml.replace('%totalprice%', itemObj.price)
-      // newHtml = newHtml.replace('%item_name%', itemObj.name);
+      newHtml = newHtml.replace('%qty%', parseInt(itemObj.quantity));
+      newHtml = newHtml.replace('%totalprice%', parseInt(itemObj.price.slice(4,6)) * itemObj.quantity);
 
       // Insert the HTML into the DOM
       document.querySelector(DOMStrings.cartItemList).insertAdjacentHTML('beforeend', newHtml);
@@ -154,6 +168,8 @@ var controller = ((itemCtrl, UICtrl) => {
     var DOM = UICtrl.getDOMStrings();
 
     document.querySelector(DOM.addBtn).addEventListener('click', ctrlAddItem);
+    document.querySelector(DOM.checkoutBtn).addEventListener('click', getData);
+
   }
 
   var ctrlAddItem = () => {
@@ -162,14 +178,30 @@ var controller = ((itemCtrl, UICtrl) => {
     var input = UICtrl.getCartItem();
 
     // Add the item to the item controller
-    newItem = itemCtrl.addItem(input.image, input.name, input.price, input.qty);
+    // (ID, img, nm, prc, qty);
+    newItem = itemCtrl.addItem(input.id, input.image, input.name, input.price, input.qty);
 
     // Add the item to the UI
-    UICtrl.addCartItem(newItem);
+    UICtrl.addCartItem(newItem); 
+
+    localStorage.setItem('id', newItem.id);
+    localStorage.setItem('image', input.image);
+    localStorage.setItem('name', input.name);
+    localStorage.setItem('price', input.price);
+    localStorage.setItem('quantity', input.qty);
 
     // console.log(input);
     // console.log(parseInt(input.price.slice(4,6)) + 2);
+    // console.log(newItem);
   };
+
+  var getData = () => {
+      var id = localStorage.getItem('id');
+      var image = localStorage.getItem('image');
+      var name = localStorage.getItem('name');
+      var price = localStorage.getItem('price');
+      var quantity = localStorage.getItem('quantity');
+  }
 
   return {
     init: () => {

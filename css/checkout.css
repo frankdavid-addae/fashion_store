@@ -243,6 +243,23 @@ button.submit.check_out:hover {
     font-size: 20px;
 }
 
+.cartTotalContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.cartTotalTitle {
+    width: 30%;
+}
+
+.cartTotal {
+    width: 30%;
+}
+
+
+
 /*-- //payment button --*/
 
 /*-- Payment page --*/

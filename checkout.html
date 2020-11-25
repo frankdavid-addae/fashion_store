@@ -101,7 +101,7 @@
                             <li class="active"><a href="#" >COLLECTION</a></li>
                             <li><a href="#" >STORE PRODUCTS</a></li>
                             <li><a href="#" >LATEST  PRODUCT</a></li>
-                            <li><a href="#" class="cart"><i class="fa fa-shopping-cart" data-toggle="modal" data-target="#cart"></i></a></li>
+                            <li><a href="#" class="cart"><i class="fa fa-shopping-cart" data-toggle="modal" data-target="#cart"><span><sup>0</sup></span></i></a></li>
                         </ul>	
                     <script>
                         $("span.menu").click(function(){
@@ -169,6 +169,20 @@
     </div>
 
 
+    <!-- <div class="products-container">
+        <div class="product-header">
+            <h5 class="product-title">Product</h5>
+            <h5 class="price">Price</h5>
+            <h5 class="quantity">Quantity</h5>
+            <h5 class="total">Total</h5>
+        </div>
+        <div class="products">
+
+        </div>
+    </div> -->
+
+
+
 <!-- checkout page -->
 <div class="privacy py-sm-5 py-4">
     <div class="container py-xl-4 py-lg-2">
@@ -182,16 +196,14 @@
                 <table class="timetable_sub">
                     <thead>
                         <tr>
-                            <th>SL No.</th>
                             <th>Product</th>
-                            <th>Quality</th>
-                            <th>Product Name</th>
-
                             <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
                             <th>Remove</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="product-container">
                         <!-- <tr class="rem1">
                             <td class="invert">1</td>
                             <td class="invert-image">
@@ -361,6 +373,7 @@
 			 	</div>
 		 </div>
 	</div>
-	<script src="js/product-detail.js"></script>
+	<!-- <script src="js/product-detail.js"></script> -->
+	<script src="js/app.js"></script>
 </body>
 </html>
